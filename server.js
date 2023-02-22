@@ -5,6 +5,14 @@ const mongoose = require("mongoose");
 const path     = require("path");
 const app      = express();
  
+const cors = require('cors');
+const corsOptions ={
+    origin:'http://localhost:3000', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+}
+app.use(cors(corsOptions));
+
 const PORT     = process.env.PORT || 4747;
 // const DB_URI   = "mongodb://localhost:27017/"
 const DB_URI = "mongodb+srv://admin-jason:Test123@cluster0.bdwcdkq.mongodb.net/"
