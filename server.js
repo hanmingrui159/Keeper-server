@@ -7,7 +7,7 @@ const app      = express();
  
 const PORT     = process.env.PORT || 4747;
 // const DB_URI   = "mongodb://localhost:27017/"
-const DB_URI = "mongodb+srv://admin-jason:Test123@cluster0.bdwcdkq.mongodb.net/sample_restaurants"
+const DB_URI = "mongodb+srv://admin-jason:Test123@cluster0.bdwcdkq.mongodb.net/"
 const DB       = "reactDB";
  
 // Middleware
@@ -28,20 +28,20 @@ const db = mongoose.connection;
 db.once('open', () => console.log(`Connected to ${DB} database`));
  
 // Create Schema
-let PersonSchema = new mongoose.Schema(
+let NoteSchema = new mongoose.Schema(
    {
-      forename: String,
-      age: Number
-   },
-   { collection: "people" }
+      title: String,
+      content: String
+   }
+   ,{ collection: "notes" }
 );
  
 // Create Model
-let PersonModel = db.model("PersonModel", PersonSchema);
+let NoteModel = db.model("NoteModel", NoteSchema);
  
 // Route to Get all People
-app.get("/api/people", (req, res) => {
-   PersonModel.find({}, (err, docs) => {
+app.get("/api/notes", (req, res) => {
+   NoteModel.find({}, (err, docs) => {
       if (!err) {
          console.log("printing person results:", docs)
          res.json(docs);
@@ -52,9 +52,9 @@ app.get("/api/people", (req, res) => {
 })
  
 // Route to Add a Person
-app.post("/api/person/add", (req, res) => {
+app.post("/api/note/add", (req, res) => {
    console.log(req.body)
-   let person = new PersonModel(req.body);
+   let person = new NoteModel(req.body);
    
    person.save((err, result) => {
       if (!err) {
