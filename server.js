@@ -52,7 +52,7 @@ let NoteModel = db.model("NoteModel", NoteSchema);
 app.get("/api/notes", (req, res) => {
    NoteModel.find({}, (err, docs) => {
       if (!err) {
-         console.log("printing person results:", docs)
+         console.log("printing notes results:", docs)
          res.json(docs);
       } else {
          res.status(400).json({ "error": err });
@@ -62,7 +62,6 @@ app.get("/api/notes", (req, res) => {
 
 // Route to Add a Person
 app.post("/api/note/add", (req, res) => {
-   console.log(req.body)
    let person = new NoteModel(req.body);
 
    person.save((err, result) => {
@@ -77,9 +76,6 @@ app.post("/api/note/add", (req, res) => {
 
 // Route to Delete a Person
 app.post("/api/note/delete", (req, res) => {
-   console.log(req.body)
-   console.log("req.body._id", req.body.noteId)
-
    NoteModel.findByIdAndDelete(req.body.noteId, function (err) {
       if (err) {
          console.log(err);
