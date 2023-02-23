@@ -11,7 +11,8 @@ const corsOptions ={
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 }
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
+app.use(cors());
 
 const PORT     = process.env.PORT || 4747;
 // const DB_URI   = "mongodb://localhost:27017/"
